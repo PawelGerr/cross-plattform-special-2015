@@ -1,0 +1,11 @@
+body {
+  padding: 30px;
+}
+body h1 {
+  font-size: 40px;
+}
+.navbar-brand img {
+  height: 100%;
+}
+
+/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImFwcC5sZXNzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0UsYUFBQTs7QUFERixJQUdFO0VBQ0UsZUFBQTs7QUFJSixhQUFjO0VBQ1osWUFBQSIsImZpbGUiOiJhcHAuY3NzIiwic291cmNlc0NvbnRlbnQiOlsiYm9keSB7XHJcbiAgcGFkZGluZzogMzBweDtcclxuXHJcbiAgaDEge1xyXG4gICAgZm9udC1zaXplOiA0MHB4O1xyXG4gIH1cclxufVxyXG5cclxuLm5hdmJhci1icmFuZCBpbWcge1xyXG4gIGhlaWdodDogMTAwJTtcclxufSJdLCJzb3VyY2VSb290IjoiL3NvdXJjZS8ifQ== */

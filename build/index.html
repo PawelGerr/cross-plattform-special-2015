@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>Cross-Plattform HTML5</title>
+    <link rel="shortcut icon" href="assets/favicon.ico" />
+    <link href="libs.css" rel="stylesheet" type="text/css"/>
+    <link href="app.css" rel="stylesheet" type="text/css"/>
+
+    <style>
+        [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+            display: none !important;
+        }
+    </style>
+</head>
+
+<body ng-app="app">
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#">
+                <img alt="Brand" src="assets/logo.png">
+            </a>
+        </div>
+    </div>
+</nav>
+<h1>Cross-Plattform HTML5</h1>
+<div ng-view></div>
+
+<script src="libs.js"></script>
+<script src="app.js"></script>
+<script src="templates.js"></script>
+</body>
+</html>

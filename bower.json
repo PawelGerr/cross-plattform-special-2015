@@ -1,0 +1,31 @@
+{
+  "name": "Gulp",
+  "version": "0.0.0",
+  "homepage": "https://github.com/thinktecture/thinktecture-research",
+  "authors": [
+    "Pawel Gerr <pawel.gerr@thinktecture.com>"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "~1.4.1",
+    "bootstrap": "~3.3.5",
+    "angular-route": "~1.4.1",
+    "jquery": "~2.1.4"
+  },
+  "overrides": {
+    "bootstrap": {
+      "main": [
+        "dist/js/bootstrap.js",
+        "dist/css/bootstrap.css",
+        "dist/fonts/*"
+      ]
+    }
+  }
+}

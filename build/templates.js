@@ -1,0 +1,1 @@
+angular.module("app").run(["$templateCache", function($templateCache) {$templateCache.put("home/home.html","<div>\r\n    {{home.text}}\r\n</div>");}]);
