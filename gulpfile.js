@@ -18,8 +18,22 @@ var gulp = require('gulp'),
 var destinationPath = 'build/';
 var bowerSrcOpts = {base: process.cwd() + '/bower_components/'};
 var globs = {
-    less: './app/**/*.less',
-    typescript: './app/**/*.ts',
+    less: {
+        bundleFileName: 'app.css',
+        path: './app/**/*.less',
+        rememberExtensionSubstitution: {
+            from: /\.less$/,
+            to: '.css'
+        }
+    },
+    typescript: {
+        bundleFileName: 'app.js',
+        path: './app/**/*.ts',
+        rememberExtensionSubstitution: {
+            from: /\.ts$/,
+            to: '.js'
+        }
+    },
     html: './app/**/*.html',
     indexhtml: './index.html',
     assets: './assets/**/*.*'
@@ -50,10 +64,28 @@ function createBundlingTask(src, srcOptions, bundleFileName, additionalSteps) {
     });
 }
 
-function createWatchTask(globs, taskName) {
-    watch(globs, function () {
+function createWatchTask(globs, taskName, bundleFileName, rememberExtensionSubstitution) {
+    var watcher = watch(globs, function () {
         gulp.start(taskName);
     });
+
+    if (bundleFileName) {
+        watcher
+            .on('unlink', function (path) {
+
+                if (cached.caches[bundleFileName]) {
+                    delete cached.caches[bundleFileName][path];
+                }
+
+                if (remember.cacheFor(bundleFileName)) {
+                    if (rememberExtensionSubstitution) {
+                        path = path.replace(rememberExtensionSubstitution.from, rememberExtensionSubstitution.to);
+                    }
+
+                    remember.forget(bundleFileName, path);
+                }
+            });
+    }
 }
 
 gulp.task('libs-js', function () {
@@ -78,7 +110,7 @@ gulp.task('libs-assets', function () {
 });
 
 gulp.task('scripts', function () {
-    return createBundlingTask(['./typings/tsd.d.ts', globs.typescript], undefined, 'app.js', function (stream) {
+    return createBundlingTask(['./typings/tsd.d.ts', globs.typescript.path], undefined, globs.typescript.bundleFileName, function (stream) {
         return stream
             .pipe(typescript({target: 'ES5'}))
             .pipe(ngAnnotate());
@@ -86,7 +118,7 @@ gulp.task('scripts', function () {
 });
 
 gulp.task('styles', function () {
-    return createBundlingTask(globs.less, undefined, 'app.css', function (stream) {
+    return createBundlingTask(globs.less.path, undefined, globs.less.bundleFileName, function (stream) {
         return stream.pipe(less());
     });
 });
@@ -114,10 +146,10 @@ gulp.task('build', function (cb) {
 });
 
 gulp.task('watch', function () {
-    createWatchTask(globs.less, 'styles');
+    createWatchTask(globs.typescript.path, 'scripts', globs.typescript.bundleFileName, globs.typescript.rememberExtensionSubstitution);
+    createWatchTask(globs.less.path, 'styles', globs.less.bundleFileName, globs.less.rememberExtensionSubstitution);
     createWatchTask(globs.html, 'templates');
     createWatchTask(globs.indexhtml, 'index-html');
-    createWatchTask(globs.typescript, 'scripts');
     createWatchTask(globs.assets, 'assets');
 });
 
